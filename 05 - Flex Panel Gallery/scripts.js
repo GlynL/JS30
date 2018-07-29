@@ -13,6 +13,7 @@ allPanels.forEach(panel => {
 });
 
 function adjustSize(e) {
+  console.log(e.currentTarget);
   this.classList.toggle("open");
   this.children[0].style.transform = "translateY(-50vh)";
   this.children[0].style.visibility = "visible";
