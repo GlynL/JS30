@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Video Speed Scrubber</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
-    <div class="speed">
-      <div class="speed-bar">1×</div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Video Speed Scrubber</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <video
+        class="flex"
+        width="765"
+        height="430"
+        src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
+        loop
+        controls
+      ></video>
+      <div class="speed">
+        <div class="speed-bar">1×</div>
+      </div>
     </div>
-  </div>
 
-<script>
-</script>
-</body>
+    <script>
+      const speed = document.querySelector(".speed");
+      const speedBar = document.querySelector(".speed-bar");
+      const video = document.querySelector(".flex");
+
+      speed.addEventListener("mousemove", speedControl);
+
+      function speedControl(e) {
+        const height = this.clientHeight;
+        const position = e.pageY - this.offsetTop;
+        const fraction = (position / height).toFixed(2);
+        const percent = fraction * 100;
+        const speed = 4 * fraction;
+        video.playbackRate = speed;
+        speedBar.style.height = `${percent}%`;
+        speedBar.textContent = `${speed}x`;
+      }
+    </script>
+  </body>
 </html>
